@@ -1,0 +1,24 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(personAlias1, "Usuário 1", "Usuário Final")
+System(comandos, "Interface", "Aplicação")
+Container(servidorweb, "Serviços", "Operação Remota")
+Container(basedados1, "Base de Dados", "MySQL/PostgreeSQL")
+System(modulodecisao, "Módulo de Decisão", "Aplicação")
+System(segusuario, "Segmentação de Usuário", "Canais")
+
+
+Rel(personAlias1, comandos, "Comandos")
+Rel(comandos, personAlias1, "Respostas")
+Rel(comandos, servidorweb, "3. Request")
+Rel(servidorweb, comandos, "8. Response")
+Rel(servidorweb, basedados1, "6. Create/Update/Delete")
+Rel(basedados1, servidorweb, "7. Response")
+Rel(comandos, modulodecisao, "1. Segmentação")
+Rel(modulodecisao, comandos, "2. Algoritmo de Decisão")
+Rel(segusuario, servidorweb, "5. Return")
+Rel(servidorweb, segusuario, "4. Function")
+
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(personAlias1, "Usuário 1", "Usuário Final")
+Person(personAlias2, "Usuário 2", "Usuário Final")
+Person(personAlias3, "Usuário 3", "Usuário Final")
+System(browser, "Browser", "Desktop")
+System(consoleapp, "Console App", "Desktop")
+System(smartapp, "Smart App", "Smartphone")
+Container(servidorweb, "Servidor Web", "Apache")
+Container(servidorapp, "Servidor de Aplicação", "Laravel/Quasar; Python/Django")
+System(servidordados1, "Servidor de Dados", "MySQL/PostgreeSQL")
+System(servidordados2, "Servidor de Dados Recovery", "MySQL/PostgreeSQL")
+Container(basedados1, "Base de Dados", "MySQL/PostgreeSQL")
+Container(basedados2, "Base de Dados Recovery", "MySQL/PostgreeSQL")
+System(email, "E-mail", "Serviço de e-mail")
+
+Rel(personAlias1, browser, "Request", "Cache")
+Rel(personAlias2, consoleapp, "Request", "Cache")
+Rel(personAlias3, smartapp, "Request", "Cache")
+Rel(browser, servidorweb, "Request", "Cache")
+Rel(consoleapp, servidorapp, "Request", "Cache")
+Rel(smartapp, servidorapp, "Request", "Cache")
+Rel(servidorweb, servidorapp, "Request", "Cache")
+Rel(servidorapp, servidordados1, "Request", "Logger")
+Rel(servidorapp, servidordados2, "Request", "Logger")
+Rel(servidordados1, basedados1, "Request", "Logger")
+Rel(servidordados2, basedados2, "Request", "Logger")
+Rel(email, servidorapp, "Request", "Cache, Logger")
+Rel(servidorapp, email, "Request", "Cache, Logger")
+Rel(servidordados2, servidordados1, "Request", "Logger")
+Rel(servidordados1, servidordados2, "Request", "Logger")
+@enduml

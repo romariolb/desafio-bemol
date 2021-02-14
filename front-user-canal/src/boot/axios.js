@@ -22,7 +22,7 @@ Vue.prototype.$axios = Axios;
 
 const BASE_URL = Axios.baseURL;
 
-const URI = `https://viacep.com.br/ws`;
+const URI = `https://cors-anywhere.herokuapp.com/https://viacep.com.br/ws`;
 
 const instance = axios.create({
     baseURL: URI,

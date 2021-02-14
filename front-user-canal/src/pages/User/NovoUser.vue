@@ -208,7 +208,9 @@ export default {
       user: {
         tipo_doc: 0,
       },
-      endereco: {},
+      endereco: {
+        rua: ''
+      },
 
       msgErro: '',
       cpf: '',
@@ -239,21 +241,24 @@ export default {
   
   watch: {
     async cep () {
+      if (this.cep.length < 9) {
+        return
+      } 
       this.cep = this.cep.replace(/\.|\-/g, '')
       this.endereco.cep = this.cep
       let response = null;
       
-      const config = { headers: {
-        'Access-Control-Allow-Origin': '*',
-        // 'Access-Control-Allow-Headers': '*'
-      } };
+      // const config = { headers: {
+      //   'Access-Control-Allow-Origin': '*',
+      //   // 'Access-Control-Allow-Headers': '*'
+      // } };
 
-      response                  = await Vue.prototype.$axios2.get(`/${this.cep}/json`, config);
-      this.endereco.rua         = response.logradouro
-      this.endereco.complemento = response.complemento
-      this.endereco.bairro      = response.bairro
-      this.endereco.cidade      = response.localidade
-      this.endereco.uf          = response.uf
+      response                  = await this.$axios2.get(`/${this.cep}/json`);
+      this.endereco.rua         = response.data.logradouro
+      this.endereco.complemento = response.data.complemento
+      this.endereco.bairro      = response.data.bairro
+      this.endereco.cidade      = response.data.localidade
+      this.endereco.uf          = response.data.uf
     }
   },
 
@@ -278,6 +283,10 @@ export default {
 
     ...mapActions('User', ['loadUser', 'addUser']),
     ...mapActions('Endereco', ['loadEndereco', 'addEndereco']),
+
+    setCEP(){
+
+    },
 
     async save () {
       if (this.user.tipo_doc == 0) {
