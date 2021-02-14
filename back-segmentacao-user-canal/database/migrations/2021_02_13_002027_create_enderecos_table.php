@@ -19,7 +19,7 @@ class CreateEnderecosTable extends Migration
             $table->string('cep', 100)->nullable();
             $table->string('rua', 100)->nullable();
             $table->string('numero', 100)->nullable();
-            $table->string('bairo', 100)->nullable();
+            $table->string('bairro', 100)->nullable();
             $table->string('cidade', 100)->nullable();
             $table->string('uf', 100)->nullable();
             $table->string('referencia', 100)->nullable();

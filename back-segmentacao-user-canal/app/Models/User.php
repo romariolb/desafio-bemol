@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Endereco\Endereco;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'nome',
         'sobrenome',
         'razao_social',
         'data_nascimento',
@@ -29,7 +30,9 @@ class User extends Authenticatable
         'tel_cel',
         'tel_fixo',
         'email',
+        'login',
         'password',
+        'endereco_id'
     ];
 
     /**
@@ -50,4 +53,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the endereco that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function endereco()
+    {
+        return $this->belongsTo('App\Models\Endereco\Endereco', 'endereco_id', 'id');
+    }
+
 }
