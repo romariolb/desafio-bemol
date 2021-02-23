@@ -18,7 +18,7 @@
 
 ---
 
-<p align="center"> Projeto desenvolvido para o desafio Bemol. A feature consiste no cadastro de usuários para um projeto de Segmentação de Clientes/Canais de Atendimento.
+<p align="center"> Projeto desenvolvido para o desafio Bemol. A feature consiste no cadastro de usuários para um projeto de Segmentação de Clientes/Canais de Atendimento. Após executar a aplicação pelo Quasar, deve-se acessar a rota localhost:8080/users .
     <br> 
 </p>
 
